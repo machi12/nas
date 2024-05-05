@@ -37,6 +37,8 @@ type RegistrationRequest struct {
 	*nasType.UpdateType5GS
 	*nasType.NASMessageContainer
 	*nasType.EPSBearerContextStatus
+	// NOTE: 增加随机数N
+	*nasType.N
 }
 
 func NewRegistrationRequest(iei uint8) (registrationRequest *RegistrationRequest) {
@@ -66,6 +68,8 @@ const (
 	RegistrationRequestUpdateType5GSType                       uint8 = 0x53
 	RegistrationRequestNASMessageContainerType                 uint8 = 0x71
 	RegistrationRequestEPSBearerContextStatusType              uint8 = 0x60
+	// NOTE: 增加N的IEI
+	RegistrationRequestNType								   uint8 = 0x23
 )
 
 func (a *RegistrationRequest) EncodeRegistrationRequest(buffer *bytes.Buffer) error {
@@ -558,6 +562,12 @@ func (a *RegistrationRequest) DecodeRegistrationRequest(byteArray *[]byte) error
 			a.EPSBearerContextStatus.SetLen(a.EPSBearerContextStatus.GetLen())
 			if err := binary.Read(buffer, binary.BigEndian, a.EPSBearerContextStatus.Octet[:]); err != nil {
 				return fmt.Errorf("NAS decode error (RegistrationRequest/EPSBearerContextStatus): %w", err)
+			}
+		case RegistrationRequestNType:
+			// NOTE: 增加接收UE发送的随机数N的部分
+			a.N = nasType.NewN(ieiN)
+			if err := binary.Read(buffer, binary.BigEndian, a.N.Octet); err != nil {
+				return fmt.Errorf("NAS decode error (RegistrationRequest/N): %w", err)
 			}
 		default:
 		}

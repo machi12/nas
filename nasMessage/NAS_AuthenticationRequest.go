@@ -19,6 +19,8 @@ type AuthenticationRequest struct {
 	*nasType.AuthenticationParameterRAND
 	*nasType.AuthenticationParameterAUTN
 	*nasType.EAPMessage
+	// NOTE: 在认证请求中增加SNMAC
+	*nasType.AuthenticationParameterSNMAC
 }
 
 func NewAuthenticationRequest(iei uint8) (authenticationRequest *AuthenticationRequest) {
@@ -27,9 +29,11 @@ func NewAuthenticationRequest(iei uint8) (authenticationRequest *AuthenticationR
 }
 
 const (
-	AuthenticationRequestAuthenticationParameterRANDType uint8 = 0x21
-	AuthenticationRequestAuthenticationParameterAUTNType uint8 = 0x20
-	AuthenticationRequestEAPMessageType                  uint8 = 0x78
+	AuthenticationRequestAuthenticationParameterRANDType  uint8 = 0x21
+	AuthenticationRequestAuthenticationParameterAUTNType  uint8 = 0x20
+	AuthenticationRequestEAPMessageType                   uint8 = 0x78
+	// NOTE: 增加SNMAC的IEI
+	AuthenticationRequestAuthenticationParameterSNMACType uint8 = 0x99
 )
 
 func (a *AuthenticationRequest) EncodeAuthenticationRequest(buffer *bytes.Buffer) error {
