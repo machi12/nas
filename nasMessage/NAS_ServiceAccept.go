@@ -7,7 +7,7 @@ import (
 	"encoding/binary"
 	"fmt"
 
-	"github.com/free5gc/nas/nasType"
+	"github.com/machi12/nas/nasType"
 )
 
 type ServiceAccept struct {

@@ -1,7 +1,7 @@
 package nasConvert
 
 import (
-	"github.com/free5gc/nas/logger"
+	"github.com/machi12/nas/logger"
 )
 
 // TS 24.008 10.5.7.4, TS 24.501 9.11.2.4

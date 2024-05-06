@@ -6,8 +6,8 @@ import (
 
 	"github.com/stretchr/testify/assert"
 
-	"github.com/free5gc/nas/nasMessage"
-	"github.com/free5gc/nas/nasType"
+	"github.com/machi12/nas/nasMessage"
+	"github.com/machi12/nas/nasType"
 )
 
 func TestNasTypeNewMobileIdentity5GS(t *testing.T) {

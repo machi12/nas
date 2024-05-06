@@ -7,8 +7,8 @@ import (
 	"net"
 	"strconv"
 
-	"github.com/free5gc/nas/logger"
-	"github.com/free5gc/nas/nasMessage"
+	"github.com/machi12/nas/logger"
+	"github.com/machi12/nas/nasMessage"
 )
 
 type ProtocolOrContainerUnit struct {

@@ -5,7 +5,7 @@ import (
 	"strings"
 	"time"
 
-	"github.com/free5gc/nas/nasType"
+	"github.com/machi12/nas/nasType"
 )
 
 func toBinaryCodedDecimal(val int) int {

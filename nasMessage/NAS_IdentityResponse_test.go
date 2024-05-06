@@ -8,10 +8,10 @@ import (
 	"github.com/stretchr/testify/assert"
 
 	//"fmt"
-	"github.com/free5gc/nas"
-	"github.com/free5gc/nas/logger"
-	"github.com/free5gc/nas/nasMessage"
-	"github.com/free5gc/nas/nasType"
+	"github.com/machi12/nas"
+	"github.com/machi12/nas/logger"
+	"github.com/machi12/nas/nasMessage"
+	"github.com/machi12/nas/nasType"
 )
 
 type nasMessageIdentityResponseData struct {

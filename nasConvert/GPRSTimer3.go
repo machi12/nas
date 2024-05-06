@@ -1,7 +1,7 @@
 package nasConvert
 
 import (
-	"github.com/free5gc/nas/nasMessage"
+	"github.com/machi12/nas/nasMessage"
 )
 
 // TS 24.008 10.5.7.4a
