@@ -74,6 +74,15 @@ func (a *AuthenticationRequest) EncodeAuthenticationRequest(buffer *bytes.Buffer
 			return fmt.Errorf("NAS encode error (AuthenticationRequest/AuthenticationParameterAUTN): %w", err)
 		}
 	}
+	// NOTE: 在认证请求消息中增加对SNMAC的编码
+	if a.AuthenticationParameterSNMAC != nil {
+		if err := binary.Write(buffer, binary.BigEndian, a.AuthenticationParameterSNMAC.GetIei()); err != nil {
+			return fmt.Errorf("NAS encode error (AuthenticationRequest/AuthenticationParameterSNMAC): %w", err)
+		}
+		if err := binary.Write(buffer, binary.BigEndian, a.AuthenticationParameterSNMAC.Octet[:]); err != nil {
+			return fmt.Errorf("NAS encode error (AuthenticationRequest/AuthenticationParameterSNMAC): %w", err)
+		}
+	}
 	if a.EAPMessage != nil {
 		if err := binary.Write(buffer, binary.BigEndian, a.EAPMessage.GetIei()); err != nil {
 			return fmt.Errorf("NAS encode error (AuthenticationRequest/EAPMessage): %w", err)
