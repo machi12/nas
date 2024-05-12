@@ -69,7 +69,7 @@ const (
 	RegistrationRequestNASMessageContainerType                 uint8 = 0x71
 	RegistrationRequestEPSBearerContextStatusType              uint8 = 0x60
 	// NOTE: 增加N的IEI
-	RegistrationRequestNType								   uint8 = 0x23
+	RegistrationRequestNType								   uint8 = 0x29
 )
 
 func (a *RegistrationRequest) EncodeRegistrationRequest(buffer *bytes.Buffer) error {
