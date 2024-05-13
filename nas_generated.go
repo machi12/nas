@@ -8,6 +8,8 @@ import (
 	"fmt"
 
 	"github.com/machi12/nas/nasMessage"
+	// NOTE: 导包
+	"github.com/sirupsen/logrus"
 )
 
 type GmmMessage struct {
@@ -75,6 +77,9 @@ const (
 )
 
 func (a *Message) GmmMessageDecode(byteArray *[]byte) error {
+	// NOTE: 打印
+	logrus.Infof("GmmMessageDecode called")
+
 	buffer := bytes.NewBuffer(*byteArray)
 	a.GmmMessage = NewGmmMessage()
 	if err := binary.Read(buffer, binary.BigEndian, &a.GmmMessage.GmmHeader); err != nil {

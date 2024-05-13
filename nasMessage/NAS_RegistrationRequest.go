@@ -8,6 +8,8 @@ import (
 	"fmt"
 
 	"github.com/machi12/nas/nasType"
+	// NOTE: 导包
+	"github.com/sirupsen/logrus"
 )
 
 type RegistrationRequest struct {
@@ -305,6 +307,10 @@ func (a *RegistrationRequest) EncodeRegistrationRequest(buffer *bytes.Buffer) er
 }
 
 func (a *RegistrationRequest) DecodeRegistrationRequest(byteArray *[]byte) error {
+	// NOTE: 打印
+	logrus.Infof("DecodeRegistrationRequest called")
+	logrus.Infof("byteArary: [%s]", byteArray)
+
 	buffer := bytes.NewBuffer(*byteArray)
 	if err := binary.Read(buffer, binary.BigEndian, &a.ExtendedProtocolDiscriminator.Octet); err != nil {
 		return fmt.Errorf("NAS decode error (RegistrationRequest/ExtendedProtocolDiscriminator): %w", err)

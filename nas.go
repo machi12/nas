@@ -6,6 +6,8 @@ import (
 	"fmt"
 
 	"github.com/machi12/nas/nasMessage"
+	// NOTE: 导包
+	"github.com/sirupsen/logrus"
 )
 
 // Message TODO：description
@@ -107,6 +109,9 @@ func GetSecurityHeaderType(byteArray []byte) uint8 {
 }
 
 func (a *Message) PlainNasDecode(byteArray *[]byte) error {
+	// NOTE: 打印
+	logrus.Infof("PlainNasDecode called")
+
 	if byteArray == nil {
 		return errors.New("byteArray is nil")
 	}
