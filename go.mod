@@ -2,11 +2,9 @@ module github.com/machi12/nas
 
 go 1.21
 
-replace github.com/free5gc/openapi v1.0.9-0.20240503143645-eac9f06c2f6b => github.com/machi12/openapi v1.0.9
-
 require (
 	github.com/aead/cmac v0.0.0-20160719120800-7af84192f0b1
-	github.com/free5gc/openapi v1.0.9-0.20240503143645-eac9f06c2f6b
+	github.com/machi12/openapi v1.1.0
 	github.com/sirupsen/logrus v1.8.1
 	github.com/smartystreets/goconvey v1.6.4
 	github.com/stretchr/testify v1.8.3
