@@ -2,7 +2,7 @@ module github.com/machi12/nas
 
 go 1.21
 
-replace github.com/free5gc/openapi v1.0.9-0.20240503143645-eac9f06c2f6b => github.com/machi12/openapi v1.0.8
+replace github.com/free5gc/openapi v1.0.9-0.20240503143645-eac9f06c2f6b => github.com/machi12/openapi v1.0.9
 
 require (
 	github.com/aead/cmac v0.0.0-20160719120800-7af84192f0b1

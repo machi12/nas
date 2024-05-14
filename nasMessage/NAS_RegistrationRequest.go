@@ -572,7 +572,7 @@ func (a *RegistrationRequest) DecodeRegistrationRequest(byteArray *[]byte) error
 		case RegistrationRequestNType:
 			// NOTE: 增加接收UE发送的随机数N的部分
 			a.N = nasType.NewN(ieiN)
-			if err := binary.Read(buffer, binary.BigEndian, a.N.Octet); err != nil {
+			if err := binary.Read(buffer, binary.BigEndian, a.N.Octet[:]); err != nil {
 				return fmt.Errorf("NAS decode error (RegistrationRequest/N): %w", err)
 			}
 		default:
