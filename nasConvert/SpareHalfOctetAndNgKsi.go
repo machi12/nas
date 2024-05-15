@@ -1,9 +1,9 @@
 package nasConvert
 
 import (
+	"github.com/free5gc/openapi/models"
 	"github.com/machi12/nas/nasMessage"
 	"github.com/machi12/nas/nasType"
-	"github.com/machi12/openapi/models"
 )
 
 func SpareHalfOctetAndNgksiToModels(ngKsiNas nasType.SpareHalfOctetAndNgksi) (ngKsiModels models.NgKsi) {

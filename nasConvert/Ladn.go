@@ -1,7 +1,7 @@
 package nasConvert
 
 import (
-	"github.com/machi12/openapi/models"
+	"github.com/free5gc/openapi/models"
 )
 
 func LadnToModels(buf []uint8) (dnnValues []string) {

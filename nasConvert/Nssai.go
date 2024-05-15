@@ -4,9 +4,9 @@ import (
 	"encoding/hex"
 	"fmt"
 
+	"github.com/free5gc/openapi/models"
 	"github.com/machi12/nas/nasMessage"
 	"github.com/machi12/nas/nasType"
-	"github.com/machi12/openapi/models"
 )
 
 // TS 24.501 9.11.3.37
