@@ -129,9 +129,14 @@ func (a *Message) PlainNasDecode(byteArray *[]byte) error {
 }
 
 func (a *Message) PlainNasEncode() ([]byte, error) {
+	// NOTE: 打印
+	logrus.Infof("PlainNasEncode called")
+
 	data := new(bytes.Buffer)
 	if a.GmmMessage != nil {
 		err := a.GmmMessageEncode(data)
+		// NOTE: 打印
+		logrus.Infof("date.Bytes: [%x]", data.Bytes())
 		return data.Bytes(), err
 	} else if a.GsmMessage != nil {
 		err := a.GsmMessageEncode(data)

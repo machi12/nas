@@ -177,6 +177,9 @@ func (a *Message) GmmMessageDecode(byteArray *[]byte) error {
 }
 
 func (a *Message) GmmMessageEncode(buffer *bytes.Buffer) error {
+	// NOTE: 打印
+	logrus.Infof("GmmMessageEncode called")
+
 	switch a.GmmMessage.GmmHeader.GetMessageType() {
 	case MsgTypeRegistrationRequest:
 		return a.GmmMessage.EncodeRegistrationRequest(buffer)
