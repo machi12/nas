@@ -1,11 +1,12 @@
 package nasType
 
+// NOTE: 对AUTN的长度进行修改，5G-ESAKA中AUTN的长度为64bits
 // AuthenticationParameterAUTN 9.11.3.15
 // AUTN Row, sBit, len = [0, 15], 8 , 128
 type AuthenticationParameterAUTN struct {
 	Iei   uint8
 	Len   uint8
-	Octet [16]uint8
+	Octet [8]uint8
 }
 
 func NewAuthenticationParameterAUTN(iei uint8) (authenticationParameterAUTN *AuthenticationParameterAUTN) {
@@ -40,13 +41,13 @@ func (a *AuthenticationParameterAUTN) SetLen(len uint8) {
 
 // AuthenticationParameterAUTN 9.11.3.15
 // AUTN Row, sBit, len = [0, 15], 8 , 128
-func (a *AuthenticationParameterAUTN) GetAUTN() (aUTN [16]uint8) {
-	copy(aUTN[:], a.Octet[0:16])
+func (a *AuthenticationParameterAUTN) GetAUTN() (aUTN [8]uint8) {
+	copy(aUTN[:], a.Octet[0:8])
 	return aUTN
 }
 
 // AuthenticationParameterAUTN 9.11.3.15
 // AUTN Row, sBit, len = [0, 15], 8 , 128
-func (a *AuthenticationParameterAUTN) SetAUTN(aUTN [16]uint8) {
-	copy(a.Octet[0:16], aUTN[:])
+func (a *AuthenticationParameterAUTN) SetAUTN(aUTN [8]uint8) {
+	copy(a.Octet[0:8], aUTN[:])
 }
