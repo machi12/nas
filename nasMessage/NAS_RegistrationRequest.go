@@ -8,8 +8,6 @@ import (
 	"fmt"
 
 	"github.com/machi12/nas/nasType"
-	// NOTE: 导包
-	"github.com/sirupsen/logrus"
 )
 
 type RegistrationRequest struct {
@@ -39,7 +37,7 @@ type RegistrationRequest struct {
 	*nasType.UpdateType5GS
 	*nasType.NASMessageContainer
 	*nasType.EPSBearerContextStatus
-	// NOTE: 增加随机数N
+	// NOTE: Add random number N
 	*nasType.N
 }
 
@@ -70,7 +68,7 @@ const (
 	RegistrationRequestUpdateType5GSType                       uint8 = 0x53
 	RegistrationRequestNASMessageContainerType                 uint8 = 0x71
 	RegistrationRequestEPSBearerContextStatusType              uint8 = 0x60
-	// NOTE: 增加N的IEI
+	// NOTE: Add IEI for N
 	RegistrationRequestNType								   uint8 = 0x29
 )
 
@@ -307,10 +305,6 @@ func (a *RegistrationRequest) EncodeRegistrationRequest(buffer *bytes.Buffer) er
 }
 
 func (a *RegistrationRequest) DecodeRegistrationRequest(byteArray *[]byte) error {
-	// NOTE: 打印
-	logrus.Infof("DecodeRegistrationRequest called")
-	logrus.Infof("byteArary: [%s]", byteArray)
-
 	buffer := bytes.NewBuffer(*byteArray)
 	if err := binary.Read(buffer, binary.BigEndian, &a.ExtendedProtocolDiscriminator.Octet); err != nil {
 		return fmt.Errorf("NAS decode error (RegistrationRequest/ExtendedProtocolDiscriminator): %w", err)
@@ -570,7 +564,7 @@ func (a *RegistrationRequest) DecodeRegistrationRequest(byteArray *[]byte) error
 				return fmt.Errorf("NAS decode error (RegistrationRequest/EPSBearerContextStatus): %w", err)
 			}
 		case RegistrationRequestNType:
-			// NOTE: 增加接收UE发送的随机数N的部分
+			// NOTE: Add decoding for N sent by UE
 			a.N = nasType.NewN(ieiN)
 			if err := binary.Read(buffer, binary.BigEndian, a.N.Octet[:]); err != nil {
 				return fmt.Errorf("NAS decode error (RegistrationRequest/N): %w", err)

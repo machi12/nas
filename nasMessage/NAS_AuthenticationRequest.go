@@ -6,8 +6,6 @@ import (
 	"bytes"
 	"encoding/binary"
 	"fmt"
-	"github.com/sirupsen/logrus"
-
 	"github.com/machi12/nas/nasType"
 )
 
@@ -20,7 +18,7 @@ type AuthenticationRequest struct {
 	*nasType.AuthenticationParameterRAND
 	*nasType.AuthenticationParameterAUTN
 	*nasType.EAPMessage
-	// NOTE: 在认证请求中增加SNMAC
+	// NOTE: Add SNMAC in the authentication request
 	*nasType.AuthenticationParameterSNMAC
 }
 
@@ -33,14 +31,11 @@ const (
 	AuthenticationRequestAuthenticationParameterRANDType  uint8 = 0x21
 	AuthenticationRequestAuthenticationParameterAUTNType  uint8 = 0x20
 	AuthenticationRequestEAPMessageType                   uint8 = 0x78
-	// NOTE: 增加SNMAC的IEI
+	// NOTE: Add IEI for SNMAC
 	AuthenticationRequestAuthenticationParameterSNMACType uint8 = 0x99
 )
 
 func (a *AuthenticationRequest) EncodeAuthenticationRequest(buffer *bytes.Buffer) error {
-	// NOTE: 打印
-	logrus.Infof("EncodeAuthenticationRequest called")
-
 	if err := binary.Write(buffer, binary.BigEndian, a.ExtendedProtocolDiscriminator.Octet); err != nil {
 		return fmt.Errorf("NAS encode error (AuthenticationRequest/ExtendedProtocolDiscriminator): %w", err)
 	}
@@ -59,8 +54,6 @@ func (a *AuthenticationRequest) EncodeAuthenticationRequest(buffer *bytes.Buffer
 	if err := binary.Write(buffer, binary.BigEndian, a.ABBA.Buffer); err != nil {
 		return fmt.Errorf("NAS encode error (AuthenticationRequest/ABBA): %w", err)
 	}
-	// NOTE: 打印
-	logrus.Infof("buffer01: [%x]", buffer.Bytes())
 	if a.AuthenticationParameterRAND != nil {
 		if err := binary.Write(buffer, binary.BigEndian, a.AuthenticationParameterRAND.GetIei()); err != nil {
 			return fmt.Errorf("NAS encode error (AuthenticationRequest/AuthenticationParameterRAND): %w", err)
@@ -69,8 +62,6 @@ func (a *AuthenticationRequest) EncodeAuthenticationRequest(buffer *bytes.Buffer
 			return fmt.Errorf("NAS encode error (AuthenticationRequest/AuthenticationParameterRAND): %w", err)
 		}
 	}
-	// NOTE: 打印
-	logrus.Infof("buffer01: [%x]", buffer.Bytes())
 	if a.AuthenticationParameterAUTN != nil {
 		if err := binary.Write(buffer, binary.BigEndian, a.AuthenticationParameterAUTN.GetIei()); err != nil {
 			return fmt.Errorf("NAS encode error (AuthenticationRequest/AuthenticationParameterAUTN): %w", err)
@@ -82,9 +73,7 @@ func (a *AuthenticationRequest) EncodeAuthenticationRequest(buffer *bytes.Buffer
 			return fmt.Errorf("NAS encode error (AuthenticationRequest/AuthenticationParameterAUTN): %w", err)
 		}
 	}
-	// NOTE: 打印
-	logrus.Infof("buffer01: [%x]", buffer.Bytes())
-	// NOTE: 在认证请求消息中增加对SNMAC的编码
+	// NOTE: Include encoding for SNMAC in the authentication request message
 	if a.AuthenticationParameterSNMAC != nil {
 		if err := binary.Write(buffer, binary.BigEndian, a.AuthenticationParameterSNMAC.GetIei()); err != nil {
 			return fmt.Errorf("NAS encode error (AuthenticationRequest/AuthenticationParameterSNMAC): %w", err)
@@ -93,8 +82,6 @@ func (a *AuthenticationRequest) EncodeAuthenticationRequest(buffer *bytes.Buffer
 			return fmt.Errorf("NAS encode error (AuthenticationRequest/AuthenticationParameterSNMAC): %w", err)
 		}
 	}
-	// NOTE: 打印
-	logrus.Infof("buffer01: [%x]", buffer.Bytes())
 	if a.EAPMessage != nil {
 		if err := binary.Write(buffer, binary.BigEndian, a.EAPMessage.GetIei()); err != nil {
 			return fmt.Errorf("NAS encode error (AuthenticationRequest/EAPMessage): %w", err)
@@ -106,8 +93,6 @@ func (a *AuthenticationRequest) EncodeAuthenticationRequest(buffer *bytes.Buffer
 			return fmt.Errorf("NAS encode error (AuthenticationRequest/EAPMessage): %w", err)
 		}
 	}
-	// NOTE: 打印
-	logrus.Infof("buffer01: [%x]", buffer.Bytes())
 	return nil
 }
 
